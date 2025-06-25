@@ -8,6 +8,10 @@ from tinygrad.device import is_dtype_supported
 
 def compare_weights_both(url):
   import torch
+   """
+    Download a model file from the given URL, load weights using both tinygrad and torch,
+    and compare the corresponding weights for equality (with dtype handling).
+    """
   fn = fetch(url)
   tg_weights = get_state_dict(torch_load(fn))
   torch_weights = get_state_dict(torch.load(fn, map_location=torch.device('cpu'), weights_only=False), tensor_type=torch.Tensor)
